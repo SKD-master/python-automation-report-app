@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Report Ready</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; background:#f7f7f7; }
+    .container { max-width:800px; margin:auto; background:white; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    .summary { display:flex; gap:20px; flex-wrap:wrap; }
+    .card { background:#f1f8ff; padding:12px 16px; border-radius:6px; min-width:160px; }
+    .btn { display:inline-block; padding:10px 14px; background:#0b74de; color:white; border-radius:6px; text-decoration:none; }
+    img { max-width:100%; height:auto; margin-top:8px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Report Generated</h1>
+    <div class="summary">
+      <div class="card"><strong>Total Revenue</strong><div>{{ total_revenue }}</div></div>
+      <div class="card"><strong>Total Units</strong><div>{{ total_units }}</div></div>
+      <div class="card"><strong>Top Product</strong><div>{{ top_product }}</div></div>
+      <div class="card"><strong>Top Region</strong><div>{{ top_region }}</div></div>
+    </div>
+
+    {% if chart_path %}
+    <h3>Monthly Revenue</h3>
+    <img src="{{ url_for('static', filename='charts/' + chart_path) }}" alt="chart">
+    {% endif %}
+
+    <div style="margin-top:16px;">
+      <a class="btn" href="{{ url_for('download', filename=excel_path) }}">Download Excel Report</a>
+      <a class="btn" href="{{ url_for('index') }}" style="background:#6c757d; margin-left:8px;">Process Another File</a>
+    </div>
+  </div>
+</body>
+</html>
